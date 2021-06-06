@@ -29,3 +29,4 @@ THEN I exit the application, and the HTML is generated
 
 ![Screenshot](assets/team-profile-generator1.png)
 ![Screenshot](assets/team-profile-generator2.png)
+![Screenshot](assets/team-profile-generator3.png)
