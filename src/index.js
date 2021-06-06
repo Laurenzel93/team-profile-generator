@@ -76,7 +76,7 @@ inquirer
         } else if (res.employees === "Intern") {
             internQuestions();
         } else {
-            createPage();
+            create();
         }
     })
 }
@@ -170,4 +170,109 @@ function internQuestions() {
                 newEmployee();
             }
         })
+}
+
+
+// Creates HTML page
+
+function create() {
+    let profilesArray = [];
+
+    let header = `
+    <!DOCTYPE html>
+    <html lang="en">
+    
+    <header>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <title>Team Profiles</title>
+    </header>
+    
+    <body>
+        <div class="jumbotron font-weight-bold text-center">
+            <h1>TEAM PROFILES</h1>
+        </div>
+    
+        <div class="container justify-content-center">
+    
+            <div class="d-flex flex-wrap justify-content-center"> `
+
+    newFile.push(header);
+
+    for (let i = 0; i < employeesArray.length; i++) {
+
+        // Because no other employees have the property officeNumber, this can be used to identify the manager
+        // Using a template literal, the cards array innerHTML is updated to reflect HTML unique to the manager
+
+        if (employeesArray[i].officeNumber) {
+
+            profilesArray.innerHTML =
+                `            <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+                <div class="card-body bg-danger text-light">
+                    <h4 class="card-header">Name:${employeesArray[i].name}</h4>
+                    <h4 class="card-title">Role:${employeesArray[i].getRole()}</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID:${employeesArray[i].id}</li>
+                    <li class="list-group-item">Email:<a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
+                    <li class="list-group-item">Phone Number:${employeesArray[i].officeNumber}</li>
+                </ul>
+            </div>`
+
+        } else if (employeeArray[i].github) {
+
+            profilesArray.innerHTML +=
+                `
+        <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+        <div class="card-body bg-info text-light">
+            <h4 class="card-header">${employeesArray[i].name}</h4>
+            <h4 class="card-title">${employeesArray[i].getRole()}</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID:${employeesArray[i].id}</li>
+        <li class="list-group-item">Email:<a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
+        <li class="list-group-item"><a href="${employeesArray[i].getGithub()}" target= "_blank">GitHub</a></li>
+        </ul>
+    </div>
+    `
+
+        } else if (employeesArray[i].school) {
+
+            profilesArray.innerHTML +=
+                `
+        <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+        <div class="card-body bg-warning text-light">
+        <h4 class="card-header">${employeesArray[i].name}</h4>
+        <h4 class="card-title">${employeesArray[i].getRole()}</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: ${employeesArray[i].id}</li>
+        <li class="list-group-item">Email: <a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
+        <li class="list-group-item">School: ${employeesArray[i].school}</li>
+        </ul>
+    </div>
+        `
+
+        }
+    }
+    newFile.push(profilesArray.innerHTML);
+
+    // The closing HTML is consistent no matter how the user responds
+
+    let bottomHTML =
+        `
+        </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        </body>
+        </html>
+        `
+
+    newFile.push(bottomHTML);
+
+    fs.writeFile("./dist/team.html", newFile.join(""), function (err) {
+        err ? console.error(err) : console.log('Thank you! Your team has been generated!')
+    })
 }
