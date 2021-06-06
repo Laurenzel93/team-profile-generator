@@ -272,7 +272,7 @@ function create() {
 
     newFile.push(bottomHTML);
 
-    fs.writeFile("./dist/team.html", newFile.join(""), function (err) {
+    fs.writeFile("./dist/YourTeam.html", newFile.join(""), function (err) {
         err ? console.error(err) : console.log('Thank you! Your team has been generated!')
     })
 }
