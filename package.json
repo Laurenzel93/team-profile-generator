@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "inquirer": "^8.1.0",
-    "jest": "^27.0.3"
+    "jest": "^27.0.4"
   },
   "devDependencies": {},
   "scripts": {

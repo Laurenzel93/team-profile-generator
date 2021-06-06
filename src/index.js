@@ -6,10 +6,14 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Employee = require("./lib/Employee");
 
-const employees = [];
+const employeesArray = [];
 const newFile = [];
 
-let roleOptions = ["Engineer", "Intern", "Done building the team!"];
+let roleOptions = [
+    "Engineer",
+    "Intern",
+    "Done building the team!"
+];
 
 function managerQuestions() {
     inquirer
@@ -27,7 +31,7 @@ function managerQuestions() {
             {
                 type: 'input',
                 name: 'managerEmail',
-                message: 'What is the managers email?',
+                message: 'What is the managers email address?',
             },
             {
                 type: 'input',
@@ -44,29 +48,126 @@ function managerQuestions() {
                 res.managerEmail,
                 res.ManagerNumber);
 
-            employees.push(manager);
+            employeesArray.push(manager);
+
+            if (res.ManagerNumber !== "") {
+                newEmployee();
+            }
         })
 }
 
 managerQuestions();
 
-function newEmployee();
+
+function newEmployee(); {
 inquirer
     .prompt([
         {
-            type: 'input',
+            type: 'list',
+            name: 'employees',
             message: 'Are you adding an intern or an engineer?',
-            name: 'ManagerNumber',
             choices: roleOptions
         }
 
     ])
     .then(function (response) {
-        if (res.employee === "Engineer") {
+        if (res.employees === "Engineer") {
             engineerQuestions();
-        } else if (res.employee === "Intern") {
+        } else if (res.employees === "Intern") {
             internQuestions();
         } else {
             createPage();
         }
     })
+}
+
+function engineerQuestions() {
+    inquirer
+        .prompt
+        ([
+            {
+                type: 'input',
+                name: "engineerName",
+                message: "What is the name of the engineer?",
+            },
+
+            {
+                type: 'input',
+                name: "engineerID",
+                message: "What is their employee ID?",
+            },
+
+            {
+                type: 'input',
+                name: "engineerEmailAddress",
+                message: "What is their email address?",
+            },
+
+            {
+                type: 'input',
+                name: "engineerGitHub",
+                message: "What is their GitHub username?",
+            },
+
+        ])
+
+        .then(function (response) {
+
+            const engineer = new Engineer(
+                res.engineerName,
+                res.engineerID,
+                res.engineerEmailAddress,
+                res.engineerGitHub);
+
+            employeeArray.push(engineer);
+
+            if (res.engineerGitHub !== "") {
+                newEmployee();
+            }
+        })
+}
+
+function internQuestions() {
+    inquirer
+        .prompt
+        ([
+            {
+                type: 'input',
+                name: "internName",
+                message: "What is the name of the intern?",
+            },
+
+            {
+                type: 'input',
+                name: "internID",
+                message: "What is their ID?",
+            },
+
+            {
+                type: 'input',
+                name: "internEmailAddress",
+                message: "What is their email address?",
+            },
+
+            {
+                type: 'input',
+                name: "internSchool",
+                message: "What is the name of their school?",
+            },
+        ])
+
+        .then(function (response) {
+
+            const intern = new Intern(
+                res.internName,
+                res.internID,
+                res.internEmailAddress,
+                res.internSchool);
+
+            employeesArray.push(intern);
+
+            if (res.internSchool !== "") {
+                newEmployee();
+            }
+        })
+}
