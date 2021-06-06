@@ -1,7 +1,7 @@
 # team-profile-generator
 This app is a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. <br>
 <br>
-Deployed Link: https://laurenzel93.github.io/team-profile-generator/ <br>
+Walkthrough Video Link: https://drive.google.com/file/d/18qKeC0JGh0COUBGoJVHuTf1kveLOLpmI/view?usp=sharing <br>
 Repo Link: https://github.com/Laurenzel93/team-profile-generator <br>
 <br>
 Techologies: HTML, CSS, JavaScript, Node<br>
