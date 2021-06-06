@@ -225,7 +225,7 @@ function create() {
 
             profilesArray.innerHTML +=
                 `
-        <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+        <div class="card text-center ml-4 mr-4 mb-5 border-dark"></div>
         <div class="card-body bg-info text-light">
             <h4 class="card-header">${employeesArray[i].name}</h4>
             <h4 class="card-title">${employeesArray[i].getRole()}</h4>
