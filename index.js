@@ -43,14 +43,14 @@ function managerQuestions() {
         .then(function (response) {
 
             const manager = new Manager(
-                res.managerName,
-                res.managerID,
-                res.managerEmail,
-                res.ManagerNumber);
+                response.managerName,
+                response.managerID,
+                response.managerEmail,
+                response.ManagerNumber);
 
             employeesArray.push(manager);
 
-            if (res.ManagerNumber !== "") {
+            if (response.ManagerNumber !== "") {
                 newEmployee();
             }
         })
@@ -59,7 +59,7 @@ function managerQuestions() {
 managerQuestions();
 
 
-function newEmployee(); {
+function newEmployee() {
 inquirer
     .prompt([
         {
@@ -71,9 +71,9 @@ inquirer
 
     ])
     .then(function (response) {
-        if (res.employees === "Engineer") {
+        if (response.employees === "Engineer") {
             engineerQuestions();
-        } else if (res.employees === "Intern") {
+        } else if (response.employees === "Intern") {
             internQuestions();
         } else {
             create();
@@ -114,14 +114,14 @@ function engineerQuestions() {
         .then(function (response) {
 
             const engineer = new Engineer(
-                res.engineerName,
-                res.engineerID,
-                res.engineerEmailAddress,
-                res.engineerGitHub);
+                response.engineerName,
+                response.engineerID,
+                response.engineerEmailAddress,
+                response.engineerGitHub);
 
-            employeeArray.push(engineer);
+            employeesArray.push(engineer);
 
-            if (res.engineerGitHub !== "") {
+            if (response.engineerGitHub !== "") {
                 newEmployee();
             }
         })
@@ -159,14 +159,14 @@ function internQuestions() {
         .then(function (response) {
 
             const intern = new Intern(
-                res.internName,
-                res.internID,
-                res.internEmailAddress,
-                res.internSchool);
+                response.internName,
+                response.internID,
+                response.internEmailAddress,
+                response.internSchool);
 
             employeesArray.push(intern);
 
-            if (res.internSchool !== "") {
+            if (response.internSchool !== "") {
                 newEmployee();
             }
         })
@@ -211,17 +211,17 @@ function create() {
             profilesArray.innerHTML =
                 `            <div class="card text-center ml-4 mr-4 mb-5 border-dark">
                 <div class="card-body bg-danger text-light">
-                    <h4 class="card-header">Name:${employeesArray[i].name}</h4>
-                    <h4 class="card-title">Role:${employeesArray[i].getRole()}</h4>
+                    <h4 class="card-header">Name: ${employeesArray[i].name}</h4>
+                    <h4 class="card-title">${employeesArray[i].getRole()}</h4>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID:${employeesArray[i].id}</li>
-                    <li class="list-group-item">Email:<a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
-                    <li class="list-group-item">Phone Number:${employeesArray[i].officeNumber}</li>
+                    <li class="list-group-item">ID: ${employeesArray[i].id}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
+                    <li class="list-group-item">Phone Number: ${employeesArray[i].officeNumber}</li>
                 </ul>
             </div>`
 
-        } else if (employeeArray[i].github) {
+        } else if (employeesArray[i].github) {
 
             profilesArray.innerHTML +=
                 `
@@ -231,8 +231,8 @@ function create() {
             <h4 class="card-title">${employeesArray[i].getRole()}</h4>
         </div>
         <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID:${employeesArray[i].id}</li>
-        <li class="list-group-item">Email:<a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
+        <li class="list-group-item">ID: ${employeesArray[i].id}</li>
+        <li class="list-group-item">Email: <a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
         <li class="list-group-item"><a href="${employeesArray[i].getGithub()}" target= "_blank">GitHub</a></li>
         </ul>
     </div>
